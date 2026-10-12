@@ -2,6 +2,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const Product = require('../models/Product')
+const adminAuth = require('../middleware/adminAuth')
 
 const router = express.Router()
 
@@ -119,7 +120,7 @@ router.get('/:id', async (req, res) => {
 
 // POST /api/products - Create a product
 // Admin authentication will be added before production use.
-router.post('/', async (req, res) => {
+router.post('/', adminAuth, async (req, res) => {
   try {
     const product = await Product.create(req.body)
 
@@ -150,7 +151,7 @@ router.post('/', async (req, res) => {
 
 // PUT /api/products/:id - Update a product
 // Admin authentication will be added before production use.
-router.put('/:id', async (req, res) => {
+router.put('/:id', adminAuth, async (req, res) => {
   try {
     if (!mongoose.isValidObjectId(req.params.id)) {
       return res.status(400).json({
@@ -226,7 +227,7 @@ router.put('/:id', async (req, res) => {
 
 // DELETE /api/products/:id - Soft-delete a product
 // Admin authentication will be added before production use.
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', adminAuth, async (req, res) => {
   try {
     if (!mongoose.isValidObjectId(req.params.id)) {
       return res.status(400).json({

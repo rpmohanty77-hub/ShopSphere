@@ -2,6 +2,7 @@
 const express = require('express')
 const cors = require('cors')
 const productRoutes = require('./routes/productRoutes')
+const authRoutes = require('./routes/authRoutes')
 
 require('dotenv').config()
 
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 5000
 app.use(cors())
 app.use(express.json())
 app.use('/api/products', productRoutes)
+app.use('/api/auth', authRoutes)
 
 // Welcome API
 app.get('/', (req, res) => {
