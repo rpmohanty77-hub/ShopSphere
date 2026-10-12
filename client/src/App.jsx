@@ -117,7 +117,6 @@ const money = (amount) =>
   `₹${Number(amount || 0).toLocaleString('en-IN')}`
 
 
-
 function App() {
 
 
@@ -201,7 +200,7 @@ useEffect(() => {
 
       const response = await fetch(
 
-        'http://localhost:5000/api/products'
+        `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/products`
 
       )
 
